@@ -1,7 +1,5 @@
 \documentclass[10pt]{beamer}
 \usepackage[utf8]{inputenc}
-\usepackage{ascii}
-\usepackage[T1]{fontenc}
 \title{Perl \\ Post Install Tests}
 
 \begin{document}
@@ -11,14 +9,14 @@
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Upgrading dependencies w\textbackslash o fear}
 \begin{enumerate}
-  \item You install a module named Bear
-  \item You install the module Human, which depends on the availability of Bear's \verb|ride()| method
-  \item You install an new version of Bear, which does NOT have the ride method; it's not safe to ride a bear!
-  \item Human's attempt to ride fails
-  \item Human gets eaten by Bear
+  \item You install a module named \verb|Bear|
+  \item You install the module \verb|Human|, which depends on the availability of Bear's \verb|ride()| method
+  \item You install an new version of \verb|Bear|, which does NOT have the \verb|ride()| method; it's not safe to ride a bear!
+  \item Human's attempt to \verb|ride()| fails
+  \item \verb|Human| gets eaten by \verb|Bear|
 \end{enumerate}
 \end{frame}
 
