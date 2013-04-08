@@ -17,13 +17,18 @@ Example:
 \begin{enumerate}
   \item You install a module named Bear
   \item You install the module Human, which is dependent on the Bear's ride method
-  \item You install an new version of Bear, which does not have the ride method anymore, its not safe to ride a bear
+  \item You install an new version of Bear, which does not have the ride method, its not safe to ride a bear
 \end{enumerate}
 \end{frame}
 
 \begin{frame}
 \frametitle{Why this is a problem}
-
+The previous example represent a problem because:
+\begin{itemize}
+\item CPAN authors have no formal commitment to the API and it may change at any time
+\item Modules might get used in an unintended way from the authors prospective, therefore and update might break functionality in an dependent module
+\item System administrators is reluctant to upgrade perl modules because they might not be compatible with other modules installed on the system and they have no way of verifying the hole perl installation with modules
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -47,6 +52,18 @@ It would be nice if you could:
 \item The test for the installed modules must be available
 \item It must be possible to locate tests for a specific module and version
 \item In order to run the tests for only the dependent modules it must be possible to do a reverse dependency search
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Demo}
+
+\begin{itemize}
+\item Extension of \verb|Module::Build|
+\item Environment variable \verb|PERL_INSTALL_TESTS| controls if tests should be installed or not
+\item Tests is installed under \verb|auto/tests/$distname-$distversion|
+\item Test files are written to the \verb|.packlist| file
+\item Action testinc uses the \verb|ExtUtils::Installed| module to retrieve the modules that would be loaded and their test files
 \end{itemize}
 \end{frame}
 
