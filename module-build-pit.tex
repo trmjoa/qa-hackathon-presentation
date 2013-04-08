@@ -64,7 +64,15 @@ It would be nice if you could:
 \item Environment variable \verb|PERL_INSTALL_TESTS| controls if tests should be installed when using  \verb|./Build install|(Also possible to use \verb|./Build installtests| without the ENV)
 \item Tests is installed under \verb|$INC[n]/auto/tests/$distname-$distversion/|
 \item Test files are written to the \verb|.packlist| file
-\item Action \verb|testinc| uses the \verb|ExtUtils::Installed| module to retrieve the modules that would be loaded and their test files
+\item Action \verb|testinc| uses the \verb|ExtUtils::Installed| distribution to retrieve the modules that would be loaded and their test files
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Problems}
+\begin{itemize}
+\item Permissions - Test that writes to devices, sockets(ports \textless \ 1024), t/... and more
+\item Currently no trivial way of finding reverse dependencies locally
 \end{itemize}
 \end{frame}
 
