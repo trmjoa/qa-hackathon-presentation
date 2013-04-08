@@ -24,12 +24,12 @@
 \frametitle{Sources of upgrade fear}
 \begin{itemize}
 \item We should not assume that CPAN authors have a formal commitment to there API's, they may change at any time
-\item Modules might get used in an unintended way from the authors perspective, therefore and update might break functionality in an dependent module
+\item Modules might get used in an unintended way from the authors perspective, therefore and update might break functionality in an dependent distribution
 \item System administrators are reluctant to upgrade perl distributions because they might not be compatible with other distributions installed on the system and they have no way of verifying the whole perl installation with distributions
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{How to detect}
 You could do the following and hope that you detect the bug\textbackslash breakage:
 \begin{itemize}
@@ -40,7 +40,7 @@ You could do the following and hope that you detect the bug\textbackslash breaka
 \vspace{5 mm}
 It would be nice if you could:
 \begin{itemize}
-\item Run tests for all distributions in @INC 
+\item Run tests for all distributions in \verb|@INC|
 \item Run tests for the distributions that depend on the newly upgraded distribution
 \item Run tests in all environments (development, test/CI, staging and {\bf production})
 \end{itemize}
@@ -64,7 +64,7 @@ It would be nice if you could:
 \item Environment variable \verb|PERL_INSTALL_TESTS| controls if tests should be installed when using  \verb|./Build install|(Also possible to use \verb|./Build installtests| without the ENV)
 \item Tests is installed under \verb|$INC[n]/auto/tests/$distname-$distversion/|
 \item Test files are written to the \verb|.packlist| file
-\item Action testinc uses the \verb|ExtUtils::Installed| module to retrieve the modules that would be loaded and their test files
+\item Action \verb|testinc| uses the \verb|ExtUtils::Installed| module to retrieve the modules that would be loaded and their test files
 \end{itemize}
 \end{frame}
 
