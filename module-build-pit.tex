@@ -1,0 +1,53 @@
+\documentclass[10pt]{beamer}
+\usepackage[utf8]{inputenc}
+
+\title{Perl \\ Post Install Tests}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The 'problem'}
+You upgrade a module that other modules depend on, this upgrade will introduce bugs, or api changes that is incompatible with the dependent module(s).
+Example:
+\begin{enumerate}
+  \item You install a module named Bear
+  \item You install the module Human, which is dependent on the Bear's ride method
+  \item You install an new version of Bear, which does not have the ride method anymore, its not safe to ride a bear
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Why this is a problem}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{How to detect}
+You could do the following and hope that you detect the bug\textbackslash breakage:
+\begin{itemize}
+\item Run your code and see
+\item Run tests for YOUR code
+\end{itemize}
+\vspace{5 mm}
+It would be nice if you could:
+\begin{itemize}
+\item Run tests for all modules in @INC 
+\item Run tests for the modules that depend on the newly upgraded module
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Post Install Tests Requirements}
+\begin{itemize}
+\item The test for the installed modules must be available
+\item It must be possible to locate tests for a specific module and version
+\item In order to run the tests for only the dependent modules it must be possible to do a reverse dependency search
+\end{itemize}
+\end{frame}
+
+\end{document}
