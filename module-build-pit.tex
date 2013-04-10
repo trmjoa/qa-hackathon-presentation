@@ -12,11 +12,11 @@
 \begin{frame}[fragile]
 \frametitle{Upgrading dependencies w/fear}
 \begin{enumerate}
-  \item Install a module named \verb|Bear|
-  \item Install the module \verb|Human|, which depends on the availability of \verb|Bear|'s \verb|ride()| method
+  \item Install distribution containing a module named \verb|Bear|
+  \item Install distribution containing module \verb|Human|, which depends on the availability of \verb|Bear|'s \verb|ride()| method
   \item (time passes...)
-  \item Upgrade to a newer version of \verb|Bear|, which does NOT have the \verb|ride()| method; The authhor of \verb|Bear| learned it's not safe to ride bears.
-  \item *boom* \verb|Human|'s attempt to \verb|ride()| fails!
+  \item Upgrade to a newer distribution version of \verb|Bear|, which does NOT have the \verb|ride()| method; The author of \verb|Bear| heard it's not safe to ride bears.
+  \item {\bf *BOOM*} \verb|Human|'s attempt to \verb|ride()| fails!
   \item \verb|Human| gets eaten by \verb|Bear| and/or customer.
 \end{enumerate}
 \end{frame}
@@ -28,48 +28,47 @@
   \item No \emph{trivial} way of verifying if the installed Perl/CPAN dists still work.
   \item Modules might be used in ways unintended by the author.
 \end{itemize}
-Detecting an upgrade bug/bear early, is \emph{good}.
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Detecting breakage}
-We have the following options:
+We want to detect the upgrade bug/bear early to avoid getting eaten! Our options are:
 \begin{itemize}
-\item Run your code and see
-\item Run integration/smoke tests for YOUR code
+\item Run your code and see if something breaks
+\item Run your code's integration/smoke tests
 \item Check cpantesters.org
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{We want more options for detecting breakage!}
+\frametitle{We want more options!}
 \begin{itemize}
-\item Run tests for all packages found in \verb|@INC|
-\item Run tests for the distributions that depend on the distribution you're about to upgrade
-\item Run tests in any runtime environment (development, test/CI, staging and if necessary, {\bf production})
+\item Run tests for all modules/distributions found in \verb|@INC|
+\item Run tests for the dists that depend on the one you're about to upgrade
+\item Run tests in any system environment (development, test/CI, staging and if necessary, {\bf production})
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Post Install Tests Requirements}
+\frametitle{Post Install Test requirements}
 \begin{itemize}
-\item The tests for the installed modules must be available (installed)
-\item It must be possible to locate tests for a specific distribution and version
-\item In order to run the tests for only the dependent distributions it must be possible to do determine this distribution's reverse dependencies
-\item Distribution dependencies are saved and installed
-\item Writing a best practices guide for tests
+\item The tests for the installed modules must be available (installed).
+\item It must be possible to locate tests for a specific distribution and version.
+\item Distribution dependencies are saved and installed.
+\item It must be possible to do determine a distribution's reverse dependencies, so we can only run the tests that are affected by a specific dist upgrade.
+\item Writing a \emph{best practices} guide on how to make tests that can be used post-install.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Demo - Module::Build::PIT}
 \begin{itemize}
-\item Extension of \verb|Module::Build|
-\item Environment variable \verb|PERL_INSTALL_TESTS| controls if tests should be installed when using  \verb|./Build install| (Also possible to use \verb|./Build installtests| without the ENV)
-\item Tests is installed under \verb|$install_base/auto/tests/$distname-$distversion/|
-\item Test files are written to the \verb|.packlist| file
-\item Action \verb|testinc| uses the \verb|ExtUtils::Installed| distribution to retrieve the modules that would be loaded and their test files
-\item Action \verb|testrdeps| is a fake action. The logic is hardcoded for demonstration purposes
+\item Extension of \verb|Module::Build|.
+\item Environment variable \verb|PERL_INSTALL_TESTS| controls if tests should be installed when using  \verb|./Build install| (Also possible to use \verb|./Build installtests| for the same effect w/o ENV).
+\item Tests are installed under \verb|$install_base/auto/tests/$distname-$distversion/|.
+\item Test files are written to the \verb|.packlist| file.
+\item Action \verb|testinc| uses the \verb|ExtUtils::Installed| distribution to retrieve the modules that would be loaded and their test files.
+\item Action \verb|testrdeps| is a hack, and depends atm. on MetaCPAN for demonstration purposes.
 \end{itemize}
 \end{frame}
 
@@ -87,9 +86,9 @@ We have the following options:
 \begin{frame}[fragile]
 \frametitle{Code}
 \begin{itemize}
-\item Code is on github!
-\item \verb|git clone| \verb|https://github.com/bannaN/Module-Build-PIT.git|
-\item \verb|git clone| \verb|https://github.com/bannaN/qa-hackathon-presentation.git|
+\item Code and slides are on github!
+\item \verb|https://github.com/bannaN/Module-Build-PIT|
+\item \verb|https://github.com/bannaN/qa-hackathon-presentation|
 \item Fork it now!
 \end{itemize}
 \end{frame}
