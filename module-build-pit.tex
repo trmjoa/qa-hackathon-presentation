@@ -23,10 +23,10 @@
 \begin{frame}
 \frametitle{Sources of upgrade fear}
 \begin{itemize}
-\item We should not assume that CPAN authors have a formal commitment to there API's, they may change at any time
-\item CPAN\textbackslash Perl community has usually been good at preserving backwards compatibility, but we cannot assume that every author is going to preserve backwards compatibility
-\item Modules might get used in an unintended way from the authors perspective, therefore and update might break functionality in an dependent distribution
-\item System administrators are reluctant to upgrade perl distributions because they might not be compatible with other distributions installed on the system and they have no way of verifying the whole perl installation with distributions
+\item We should not assume that CPAN authors have a formal commitment to their APIs, they may change at any time
+\item No trivial way of verifying the whole perl installation with distributions
+\item CPAN/Perl community has usually been good at preserving backwards compatibility
+\item Modules might get used in an unintended way from the authors perspective
 \end{itemize}
 \end{frame}
 
@@ -38,10 +38,11 @@ You could do the following and hope that you detect the bug\textbackslash breaka
 \item Run tests for YOUR code
 \item Check cpantesters.org if you are running cutting edge from CPAN
 \end{itemize}
-\vspace{5 mm}
-It would be nice if you could:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Goals}
 \begin{itemize}
-\item Run tests for all distributions in \verb|@INC|
+\item Run tests for all distributions loadable in \verb|@INC|
 \item Run tests for the distributions that depend on the newly upgraded distribution
 \item Run tests in all environments (development, test/CI, staging and {\bf production})
 \end{itemize}
@@ -64,7 +65,7 @@ It would be nice if you could:
 \begin{itemize}
 \item Extension of \verb|Module::Build|
 \item Environment variable \verb|PERL_INSTALL_TESTS| controls if tests should be installed when using  \verb|./Build install|(Also possible to use \verb|./Build installtests| without the ENV)
-\item Tests is installed under \verb|$INC[n]/auto/tests/$distname-$distversion/|
+\item Tests is installed under \verb|$install_base/auto/tests/$dname-$dversion/|
 \item Test files are written to the \verb|.packlist| file
 \item Action \verb|testinc| uses the \verb|ExtUtils::Installed| distribution to retrieve the modules that would be loaded and their test files
 \item Action \verb|testrdeps| is a fake action. The logic is hardcoded for demonstration purposes
@@ -72,10 +73,12 @@ It would be nice if you could:
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Problems}
+\frametitle{Future Work / Considerations}
 \begin{itemize}
 \item Permissions - Test that writes to devices, sockets(ports \textless \ 1024), t/... and more
 \item Currently no trivial way of finding reverse dependencies locally
+\item Integration with packaging systems
+\item Best practices doc
 \end{itemize}
 \end{frame}
 
