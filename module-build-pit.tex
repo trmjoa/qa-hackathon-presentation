@@ -10,7 +10,7 @@
 
 
 \begin{frame}[fragile]
-\frametitle{Upgrading dependencies w\textbackslash o fear}
+\frametitle{Upgrading dependencies w/o fear}
 \begin{enumerate}
   \item You install a module named \verb|Bear|
   \item You install the module \verb|Human|, which depends on the availability of Bear's \verb|ride()| method
@@ -21,7 +21,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Sources of upgrade fear}
+\frametitle{Sources of \emph{upgrade fear}}
 \begin{itemize}
 \item We should not assume that CPAN authors have a formal commitment to their APIs, they may change at any time
 \item No trivial way of verifying the whole perl installation with distributions
@@ -31,16 +31,16 @@
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{How to detect}
-You could do the following and hope that you detect the bug\textbackslash breakage:
+\frametitle{How to detect breakage}
+You could do the following and hope that you detect the bug/ breakage:
 \begin{itemize}
 \item Run your code and see
 \item Run tests for YOUR code
-\item Check cpantesters.org if you are running cutting edge from CPAN
+\item Check cpantesters.org
 \end{itemize}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Goals}
+\frametitle{What we want}
 \begin{itemize}
 \item Run tests for all distributions loadable in \verb|@INC|
 \item Run tests for the distributions that depend on the newly upgraded distribution
@@ -65,7 +65,7 @@ You could do the following and hope that you detect the bug\textbackslash breaka
 \begin{itemize}
 \item Extension of \verb|Module::Build|
 \item Environment variable \verb|PERL_INSTALL_TESTS| controls if tests should be installed when using  \verb|./Build install|(Also possible to use \verb|./Build installtests| without the ENV)
-\item Tests is installed under \verb|$install_base/auto/tests/$dname-$dversion/|
+\item Tests is installed under \verb|$install_base/auto/tests/$distname-$distversion/|
 \item Test files are written to the \verb|.packlist| file
 \item Action \verb|testinc| uses the \verb|ExtUtils::Installed| distribution to retrieve the modules that would be loaded and their test files
 \item Action \verb|testrdeps| is a fake action. The logic is hardcoded for demonstration purposes
